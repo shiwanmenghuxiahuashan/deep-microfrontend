@@ -1,0 +1,59 @@
+{
+  "name": "deep-microfrontend",
+  "version": "1.0.0",
+  "description": "一个实现微前端 MVP 的示例项目",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.12.4",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "type-check": "tsc --noEmit --project packages/micro-frontend/tsconfig.json",
+    "type-check:watch": "tsc --noEmit --watch --project packages/micro-frontend/tsconfig.json",
+    "commitlint": "commitlint --edit"
+  },
+  "keywords": [
+    "micro-frontend",
+    "monorepo",
+    "vue3",
+    "vite"
+  ],
+  "author": "lichonglou",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.0.0",
+    "concurrently": "^8.2.2",
+    "@eslint/js": "^9.0.0",
+    "typescript-eslint": "^8.0.0",
+    "globals": "^15.0.0",
+    "typescript": "^5.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0"
+  },
+  "lint-staged": {
+    "packages/micro-frontend/**/*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "packages/micro-frontend/**/*.{js,jsx,vue,json,md}": [
+      "prettier --write"
+    ],
+    "*.{js,json,md}": [
+      "prettier --write"
+    ]
+  }
+}

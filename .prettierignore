@@ -1,0 +1,30 @@
+# Prettier 忽略文件配置
+# 排除不需要格式化的文件和目录
+
+# TypeScript 配置文件
+tsconfig.settings.json
+
+# 构建输出目录
+dist/
+build/
+out/
+
+# 依赖目录
+node_modules/
+
+# 日志文件
+*.log
+
+# 临时文件
+*.tmp
+*.temp
+
+# 包管理器文件
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# 其他配置文件
+.env
+.env.local
+.env.*.local
