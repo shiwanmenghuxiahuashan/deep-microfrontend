@@ -75,8 +75,6 @@ export default [
       // TypeScript 相关规则
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/prefer-const': 'error',
-
       // Prettier 集成规则
       'prettier/prettier': 'error'
     },
