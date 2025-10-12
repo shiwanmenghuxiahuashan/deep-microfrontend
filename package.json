@@ -20,7 +20,8 @@
     "format:check": "prettier --check .",
     "type-check": "tsc --noEmit --project packages/micro-frontend/tsconfig.json",
     "type-check:watch": "tsc --noEmit --watch --project packages/micro-frontend/tsconfig.json",
-    "commitlint": "commitlint --edit"
+    "commitlint": "commitlint --edit",
+    "dev": "concurrently --kill-others --prefix-colors \"#05DF72,#FB64B6\" \"pnpm --filter micro-frontend build:watch\" \"pnpm --filter client dev\""
   },
   "keywords": [
     "micro-frontend",
