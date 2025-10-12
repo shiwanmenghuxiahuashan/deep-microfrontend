@@ -9,7 +9,7 @@ const router = createRouter({
     {
       path: '/home',
       name: 'home',
-      component: () => import('./views/HomePage.vue'),
+      component: () => import('./views/HomePage/IndexPage.vue'),
       meta: {
         label: '首页',
         topNav: true,
@@ -17,12 +17,22 @@ const router = createRouter({
       },
       children: [
         {
+          path: 'welcome',
+          name: 'welcome',
+          meta: {
+            label: '欢迎页',
+            hidden: true
+          },
+          // @ts-ignore
+          component: () => import('./views/HomePage/WelcomePage.vue')
+        },
+        {
           path: 'custom-element',
           name: 'custom-element',
           meta: {
             label: '自定义元素'
           },
-          component: () => import('./views/CustomElementPage.vue')
+          component: () => import('./views/HomePage/CustomElementPage.vue')
         }
       ]
     },

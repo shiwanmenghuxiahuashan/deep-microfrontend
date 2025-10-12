@@ -5,7 +5,7 @@
   --white-color: #fff;
   --text-color: #333;
   --shadow-color: #f0f1f2;
-  
+
   --header-height: 54px;
   --container-max-width: 90%;
   --common-padding: 20px;
@@ -19,12 +19,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-// 主容器
-.client-container {
-  width: 100%;
-  background-color: var(--background-color);
-  position: relative;
+html,
+body {
+  font-size: 14px;
 }
 
 // 头部样式
@@ -39,7 +36,7 @@
   z-index: 1000;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 0 var(--header-padding);
 
   &-brand {
@@ -62,25 +59,45 @@
   }
 }
 
-// 主体样式
-.clien-body {
-  background-color: var(--background-color);
-  padding-top: var(--header-height);
-  height: 100vh;
+// 主容器
+.client-container {
   width: 100%;
-  box-sizing: border-box;
+  background-color: var(--background-color);
+  position: relative;
+  // 主体样式
+  .clien-body {
+    background-color: var(--background-color);
+    padding-top: var(--header-height);
+    min-height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    .client-page {
+      width: 100%;
+      min-height: calc(100vh - var(--header-height));
+    }
+  }
 }
 
-// 微前端应用容器
-.micro-app-container {
-  max-width: var(--container-max-width);
-  margin: 0 auto;
+.client-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background-color: var(--white-color);
-}
+  color: var(--text-color, #333);
+  padding: var(--common-padding, 20px);
 
+  h1 {
+    margin-bottom: 20px;
+    color: var(--primary-color, #009688);
+    font-size: 12rem;
+  }
+
+  p {
+    margin-bottom: 40px;
+    font-size: 6rem;
+  }
+}
 // 通用开发容器
 .common-dev-container {
   padding: var(--common-padding);

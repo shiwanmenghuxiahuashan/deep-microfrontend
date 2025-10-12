@@ -3,7 +3,6 @@ import { useRouter } from 'vue-router';
 import { computed } from 'vue';
 
 const router = useRouter();
-console.log(router.getRoutes());
 // 动态获取顶级路由（排除重定向路由和子路由）
 const topLevelRoutes = computed(() => {
   return router
@@ -20,7 +19,7 @@ const topLevelRoutes = computed(() => {
 <template>
   <div class="client-container">
     <div class="client-header">
-      <div class="client-header-brand">基座应用（Vue3 + Vite）</div>
+      <div class="client-header-brand">微前端</div>
       <div class="client-header-nav">
         <router-link
           v-for="item in topLevelRoutes"
