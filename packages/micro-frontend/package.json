@@ -1,0 +1,23 @@
+{
+  "name": "micro-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/MicroFrontend.umd.js",
+  "module": "./dist/MicroFrontend.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/MicroFrontend.es.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "preview": "vite preview",
+    "build": "tsc && vite build",
+    "build:watch": "vite build --watch --mode development"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "vite": "^7.1.7"
+  }
+}

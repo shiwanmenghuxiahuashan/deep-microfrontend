@@ -1,0 +1,68 @@
+{
+  // JSON Schema 定义，提供 IDE 智能提示和验证
+  "$schema": "https://json.schemastore.org/tsconfig",
+  // 配置文件的显示名称
+  "display": "Micro Frontend Settings",
+  "compilerOptions": {
+    // 编译目标版本，ES2023 支持最新的 JavaScript 特性
+    "target": "ES2023",
+    // 使用 define 语义处理类字段，符合 ES2022+ 标准
+    "useDefineForClassFields": true,
+    // 模块系统类型，ESNext 支持最新的 ES 模块语法
+    "module": "ESNext",
+    // 包含的库文件，ES2023 提供最新 API，DOM 提供浏览器 API
+    "lib": ["ES2023", "DOM"],
+    // 包含的类型定义文件，vite/client 提供 Vite 相关的类型
+    "types": ["vite/client"],
+    // 跳过库文件的类型检查，提高编译速度
+    "skipLibCheck": true,
+
+    /* ========== 打包器模式配置 ========== */
+    // 模块解析策略，bundler 模式适合现代打包工具
+    "moduleResolution": "bundler",
+    // 允许导入 .ts 扩展名文件
+    "allowImportingTsExtensions": true,
+    // 保持模块语法的原始形式，不进行转换
+    "verbatimModuleSyntax": true,
+    // 强制检测所有文件为模块
+    "moduleDetection": "force",
+    // 允许从没有默认导出的模块中默认导入
+    "allowSyntheticDefaultImports": true,
+    // 生成声明文件 (.d.ts)，用于类型导出
+    "declaration": true,
+    // 生成声明文件的 source map，便于调试
+    "declarationMap": true,
+    // 输出目录，编译后的文件存放位置
+    "outDir": "./dist",
+    // 根目录，源代码的根路径
+    "rootDir": "./src",
+    // 启用 ES 模块互操作性
+    "esModuleInterop": true,
+    // 强制文件名大小写一致，避免跨平台问题
+    "forceConsistentCasingInFileNames": true,
+    // 允许导入 JSON 文件
+    "resolveJsonModule": true,
+    // 将每个文件视为独立模块，提高编译性能
+    "isolatedModules": true,
+    // 不生成输出文件，仅进行类型检查（由 Vite 处理编译）
+    "noEmit": true,
+
+    /* ========== 代码质量检查配置 ========== */
+    // 启用所有严格类型检查选项
+    "strict": true,
+    // 检查未使用的局部变量
+    "noUnusedLocals": true,
+    // 检查未使用的函数参数
+    "noUnusedParameters": true,
+    // 只允许可擦除的语法，确保类型安全
+    "erasableSyntaxOnly": true,
+    // 检查 switch 语句中的 fallthrough 情况
+    "noFallthroughCasesInSwitch": true,
+    // 检查未检查的副作用导入
+    "noUncheckedSideEffectImports": true
+  },
+  // 包含的文件/目录，只编译 src 目录下的文件
+  "include": ["src"],
+  // 排除的文件/目录，不编译 node_modules 和 dist 目录
+  "exclude": ["node_modules", "dist"]
+}
