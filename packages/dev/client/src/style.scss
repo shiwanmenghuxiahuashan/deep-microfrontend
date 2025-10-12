@@ -1,0 +1,89 @@
+// CSS 变量定义
+:root {
+  --primary-color: #009688;
+  --background-color: #f0f0f0;
+  --white-color: #fff;
+  --text-color: #333;
+  --shadow-color: #f0f1f2;
+  
+  --header-height: 54px;
+  --container-max-width: 90%;
+  --common-padding: 20px;
+  --nav-gap: 20px;
+  --header-padding: 50px;
+}
+
+// 全局重置样式
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// 主容器
+.client-container {
+  width: 100%;
+  background-color: var(--background-color);
+  position: relative;
+}
+
+// 头部样式
+.client-header {
+  height: var(--header-height);
+  background-color: var(--white-color);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 var(--header-padding);
+
+  &-brand {
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+
+  .client-header-nav {
+    display: flex;
+    gap: var(--nav-gap);
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-color);
+
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+  }
+}
+
+// 主体样式
+.clien-body {
+  background-color: var(--background-color);
+  padding-top: var(--header-height);
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+// 微前端应用容器
+.micro-app-container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: var(--white-color);
+}
+
+// 通用开发容器
+.common-dev-container {
+  padding: var(--common-padding);
+  width: var(--container-max-width);
+  margin: 0 auto;
+}

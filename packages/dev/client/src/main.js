@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import microFrontend from 'micro-frontend';
-import './style.css';
+import './style.scss';
 import { router } from './router';
 import App from './App.vue';
 microFrontend.start({
