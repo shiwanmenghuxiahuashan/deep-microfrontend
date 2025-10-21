@@ -21,7 +21,10 @@
     "type-check": "tsc --noEmit --project packages/micro-frontend/tsconfig.json",
     "type-check:watch": "tsc --noEmit --watch --project packages/micro-frontend/tsconfig.json",
     "commitlint": "commitlint --edit",
-    "dev": "concurrently --kill-others --prefix-colors \"#05DF72,#FB64B6\" \"pnpm --filter micro-frontend build:watch\" \"pnpm --filter client dev\""
+    "dev": "concurrently --kill-others --prefix-colors \"#05DF72,#FB64B6\" \"pnpm --filter micro-frontend build:watch\" \"pnpm --filter client dev\"",
+    "dev:demo:main": "vite --config demo/loadHtmlMvp/vite.config.js",
+    "dev:demo:sub": "vite --config demo/loadHtmlMvp/vite.sub.config.js",
+    "dev:demo": "concurrently --kill-others --prefix-colors \"#00A3FF,#FF8A00\" \"pnpm dev:demo:main\" \"pnpm dev:demo:sub\""
   },
   "keywords": [
     "micro-frontend",
