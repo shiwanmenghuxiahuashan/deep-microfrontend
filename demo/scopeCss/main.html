@@ -1,0 +1,142 @@
+<html>
+  <head>
+    <title>主应用</title>
+    <style>
+      #sub-container {
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        border: 4px solid green;
+      }
+      .header {
+        width: 100%;
+        height: 100px;
+        border: 1px solid #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <script src="./scopeCss.js"></script>
+  </head>
+  <body>
+    <div class="header">
+      <h1>主应用</h1>
+    </div>
+    <div id="sub-container"></div>
+    <script>
+      const baseUrl = 'http://127.0.0.1:5500/demo/scopeCss/';
+      const subAppUrl = `${baseUrl}sub.html`;
+      // 资源提取函数
+      function extractResources(htmlString) {
+        // 1. 定义资源提取配置 (配置化核心)
+        const resourceConfigs = [
+          {
+            type: 'stylesheets',
+            selector: 'link[rel="stylesheet"]',
+            attribute: 'href',
+            collection: [] // 用于存储提取结果
+          },
+          {
+            type: 'scripts',
+            selector: 'script[src]',
+            attribute: 'src',
+            collection: [] // 用于存储提取结果
+          }
+        ];
+
+        // 2. DOM 解析
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, 'text/html');
+
+        // 3. 通用提取逻辑
+        resourceConfigs.forEach((config) => {
+          const elements = doc.querySelectorAll(config.selector);
+          elements.forEach((dom) => {
+            const resourceUrl = dom.getAttribute(config.attribute);
+            
+            if (resourceUrl) {
+              // 记录资源 URL 到对应的集合中
+              config.collection.push(resourceUrl);
+
+              dom.parentElement.replaceChild(
+                document.createComment(
+                  `${config.type} 元素 [${resourceUrl}] 已被提取跳过加载`
+                ),
+                dom
+              );
+            }
+          });
+        });
+
+        // 4. 构建并返回结果对象
+        const result = {};
+        resourceConfigs.forEach((config) => {
+          result[config.type] = config.collection;
+        });
+
+        const div = document.createElement('div');
+        div.innerHTML = doc.body.innerHTML;
+        result.htmlDom = div;
+        return result;
+      }
+
+      // 加载脚本
+      function loadScript(src, baseUrl = '') {
+        return new Promise((resolve, reject) => {
+          const absoluteUrl = src.startsWith('http') ? src : `${baseUrl}${src}`;
+
+          const existingScript = document.querySelector(
+            `script[src="${absoluteUrl}"]`
+          );
+          if (existingScript) {
+            resolve();
+            return;
+          }
+
+          const script = document.createElement('script');
+          script.src = absoluteUrl;
+          script.onload = () => resolve();
+          script.onerror = () =>
+            reject(new Error(`Failed to load script: ${absoluteUrl}`));
+
+          document.head.appendChild(script);
+        });
+      }
+      const subContainer = document.getElementById('sub-container');
+
+      fetch(subAppUrl)
+        .then((res) => res.text())
+        .then(async (html) => {
+          // 提取资源
+          const resources = extractResources(html);
+          console.log(resources.htmlDom);
+          // 加载样式表
+          await fetch(`${baseUrl}${resources.stylesheets[0]}`)
+            .then((res) => res.text())
+            .then((styleText) => {
+              scopeCss(document.head, styleText);
+            });
+
+          // 加载脚本
+          const scriptCode = await fetch(
+            `${baseUrl}${resources.scripts[0]}`
+          ).then((res) => res.text());
+
+          const cloneHtml = resources.htmlDom.cloneNode(true);
+
+          //创建一个fragment片段
+          const fragment = document.createDocumentFragment();
+          Array.from(cloneHtml.childNodes).forEach((node) => {
+            fragment.appendChild(node);
+          });
+
+          subContainer.appendChild(fragment);
+          // eval(code)	继承调用上下文的 this	在当前词法作用域内执行，可以访问和修改局部变量。
+          // (0, eval)(code) 或 window.eval(code) 等	总是指向全局对象 (window / globalThis)	在全局作用域内执行，不会访问或修改局部变量。
+          (0, eval)(scriptCode);
+        });
+    </script>
+  </body>
+</html>
