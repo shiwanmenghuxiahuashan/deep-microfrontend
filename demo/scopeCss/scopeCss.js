@@ -1,5 +1,5 @@
 let templateStyle; //临时模板style
-function scopeCss(targetEl, styleText) {
+function scopeCss(styleText) {
   const template = document.createElement('style');
   document.body.appendChild(template);
   template.textContent = styleText;
@@ -11,10 +11,6 @@ function scopeCss(targetEl, styleText) {
 
     return cssText.replace(selectorText, `${prefix} ${selectorText}`);
   });
-  console.log(result);
-
-  const styleTag = document.createElement('style');
-  styleTag.textContent = result.join(' ');
-  targetEl.appendChild(styleTag);
   template.textContent = '';
+  return result.join(' ');
 }

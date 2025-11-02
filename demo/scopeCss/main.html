@@ -55,7 +55,7 @@
           const elements = doc.querySelectorAll(config.selector);
           elements.forEach((dom) => {
             const resourceUrl = dom.getAttribute(config.attribute);
-            
+
             if (resourceUrl) {
               // 记录资源 URL 到对应的集合中
               config.collection.push(resourceUrl);
@@ -116,7 +116,9 @@
           await fetch(`${baseUrl}${resources.stylesheets[0]}`)
             .then((res) => res.text())
             .then((styleText) => {
-              scopeCss(document.head, styleText);
+              const styleTag = document.createElement('style');
+              styleTag.textContent = scopeCss(styleText);
+              document.head.appendChild(styleTag);
             });
 
           // 加载脚本
